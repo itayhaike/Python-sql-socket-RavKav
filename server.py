@@ -47,8 +47,13 @@ ID = '''SELECT card_id
          FROM cards;'''
 cur.execute(ID)
 results_id = cur.fetchall()
+
+ids_results = []
+for i in results_id:
+    i1 = i[0]
+    ids_results.append(i1)
 IDs = ''.join(str(x) for x in results_id)
-# print(IDs)
+
 
 # update cards contracts
 select_check = '''SELECT *
@@ -79,11 +84,11 @@ select_wallet = '''SELECT wallet
 
 # Client requests
 while True:
-    data, address = socket_server.recvfrom(1024)
+    data, address = socket_server.recvfrom(64)
     client_choice = data.decode()
     if client_choice == "1":
-        print("Client asks for cards ID`s:", IDs)
-        socket_server.sendto(IDs.encode(), address)
+        print("Client asks for cards ID`s:", ids_results)
+        socket_server.sendto(str(ids_results).encode(), address)
 
     elif client_choice == "2":
         new_card = (random.randint(1, 999), None, 0)
