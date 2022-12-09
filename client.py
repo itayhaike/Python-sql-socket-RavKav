@@ -87,8 +87,6 @@ while True:
 
         data, address = socket_client.recvfrom(128)
         print(data.decode())
-        # data1, address1 = socket_client.recvfrom(128)
-        # print(data1.decode())
 
     else:
         print("Enter Only 1-5 Choice!!!")
